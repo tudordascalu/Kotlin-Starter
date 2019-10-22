@@ -6,10 +6,9 @@ import java.util.*
 import kotlin.collections.HashMap
 
 fun verifyToken(token: String, appSecret: String): Jws<Claims>? {
-    val jwsClaims: Jws<Claims>? = Jwts.parser()
+    return Jwts.parser()
         .setSigningKey(appSecret)
         .parseClaimsJws(token)
-    return jwsClaims
 }
 
 fun generateJwtToken(user: User, appId: String, appSecret: String): String {
