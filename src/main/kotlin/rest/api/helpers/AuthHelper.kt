@@ -16,7 +16,6 @@ fun generateJwtToken(user: User, appId: String, appSecret: String): String {
     val claims: HashMap<String, Any?> = HashMap<String, Any?>();
 
     claims["username"] = user.username
-    claims["password"] = user.pass
     claims["sub"] =  "AuthRequest"
 
     return Jwts.builder()

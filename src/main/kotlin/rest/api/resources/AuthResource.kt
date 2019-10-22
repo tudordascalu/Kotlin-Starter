@@ -17,6 +17,9 @@ class AuthResource(private val appId: String, private val appSecret: String) {
     @POST
     @Consumes(APPLICATION_JSON)
     fun login(authRequest: AuthRequest): AuthResponse {
+
+        // here validation of user data against DB should happen
+
         val user = User(authRequest.username, authRequest.pass);
         val token = generateJwtToken(user, appId, appSecret)
         return AuthResponse("Login success", token)
