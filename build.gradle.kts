@@ -27,6 +27,7 @@ dependencies {
     api("io.dropwizard:dropwizard-core:0.8.0")
     implementation("io.jsonwebtoken:jjwt:0.7.0")
     testImplementation("junit:junit:4.12")
+    compile(group="postgresql", name="postgresql", version="9.1-901-1.jdbc4")
 }
 
 tasks.dokka {
