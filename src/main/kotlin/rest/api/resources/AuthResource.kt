@@ -1,5 +1,6 @@
 package rest.api.resources
 
+import rest.api.db.UsersDb
 import rest.api.domain.auth.AuthRequest
 import rest.api.domain.auth.AuthResponse
 import rest.api.domain.auth.User
@@ -12,10 +13,10 @@ import javax.ws.rs.core.MediaType.APPLICATION_JSON
 
 @Path("/auth")
 @Produces(APPLICATION_JSON)
-class AuthResource(private val appId: String, private val appSecret: String) {
+@Consumes(APPLICATION_JSON)
+class AuthResource(private val appId: String, private val appSecret: String, val usersDb: UsersDb) {
     @Path("/login")
     @POST
-    @Consumes(APPLICATION_JSON)
     fun login(authRequest: AuthRequest): AuthResponse {
 
         // here validation of user data against DB should happen
@@ -23,5 +24,12 @@ class AuthResource(private val appId: String, private val appSecret: String) {
         val user = User(authRequest.username, authRequest.pass);
         val token = generateJwtToken(user, appId, appSecret)
         return AuthResponse("Login success", token)
+    }
+
+    @Path("/signup")
+    @POST
+    fun signup(authRequest: AuthRequest): AuthResponse {
+        usersDb.createUser(authRequest.username, authRequest.pass)
+        return AuthResponse("Signup success")
     }
 }

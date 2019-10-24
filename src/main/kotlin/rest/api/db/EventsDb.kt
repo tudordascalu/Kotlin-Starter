@@ -5,7 +5,7 @@ import java.sql.Connection
 import java.sql.ResultSet
 import java.sql.Statement
 
-class DbHelper(val connection: Connection) {
+class EventsDb(val connection: Connection) {
     fun getEvents(): List<Event> {
         val statement: Statement = connection.createStatement()
         val resultSet: ResultSet =  statement.executeQuery("SELECT * FROM events")
